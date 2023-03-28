@@ -13,7 +13,7 @@ const Movie = (props) => {
 
   const handleRemove = () => {
     dispatch(deleteMovie(id))
-    push('/movies')
+    push('/movies/')
   }
 
   return (
