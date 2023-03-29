@@ -11,6 +11,9 @@ const Movie = (props) => {
   const dispatch = useDispatch()
   const movies = useSelector((store) => store.movieReducer.movies)
   const movie = movies.find((movie) => movie.id === Number(id))
+  const displayFavorites = useSelector(
+    (store) => store.favoriteReducer.displayFavorites
+  )
 
   const handleRemove = () => {
     dispatch(deleteMovie(Number(id)))
@@ -53,12 +56,14 @@ const Movie = (props) => {
         >
           Sil
         </button>
-        <button
-          onClick={() => dispatch(addFavorite(movie))}
-          className="myButton bg-blue-600 hover:bg-blue-500 "
-        >
-          Favorilere ekle
-        </button>
+        {displayFavorites && (
+          <button
+            onClick={() => dispatch(addFavorite(movie))}
+            className="myButton bg-blue-600 hover:bg-blue-500 "
+          >
+            Favorilere ekle
+          </button>
+        )}
       </div>
     </div>
   )
