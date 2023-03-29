@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom'
+import { addFavorite } from '../actions/favoritesActions'
 import { deleteMovie } from '../actions/movieActions'
 
 const Movie = (props) => {
@@ -8,12 +9,16 @@ const Movie = (props) => {
   const { push } = useHistory()
 
   const dispatch = useDispatch()
-  const movies = useSelector((store) => store.movies)
+  const movies = useSelector((store) => store.movieReducer.movies)
   const movie = movies.find((movie) => movie.id === Number(id))
 
   const handleRemove = () => {
-    dispatch(deleteMovie(id))
-    push('/movies/')
+    dispatch(deleteMovie(Number(id)))
+    push('/movies')
+  }
+
+  const handleFavorite = () => {
+    dispatch(addFavorite(Number(id)))
   }
 
   return (
@@ -51,7 +56,10 @@ const Movie = (props) => {
         >
           Sil
         </button>
-        <button className="myButton bg-blue-600 hover:bg-blue-500 ">
+        <button
+          onClick={handleFavorite}
+          className="myButton bg-blue-600 hover:bg-blue-500 "
+        >
           Favorilere ekle
         </button>
       </div>
