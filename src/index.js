@@ -8,13 +8,13 @@ import './index.css'
 
 import { legacy_createStore as createStore } from 'redux'
 import { Provider } from 'react-redux'
-import reducer from './reducers'
+import { reducers } from './reducers'
 
-const myStore = createStore(reducer)
+export const store = createStore(reducers)
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
-  <Provider store={myStore}>
+  <Provider store={store}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
