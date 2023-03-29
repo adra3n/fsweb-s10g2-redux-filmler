@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom'
-import { addFavorite } from '../actions/favoritesActions'
+import { addFavorite, removeFavorite } from '../actions/favoritesActions'
 import { deleteMovie } from '../actions/movieActions'
 
 const Movie = (props) => {
@@ -14,11 +14,8 @@ const Movie = (props) => {
 
   const handleRemove = () => {
     dispatch(deleteMovie(Number(id)))
+    dispatch(removeFavorite(Number(id)))
     push('/movies')
-  }
-
-  const handleFavorite = () => {
-    dispatch(addFavorite(Number(id)))
   }
 
   return (
@@ -57,7 +54,7 @@ const Movie = (props) => {
           Sil
         </button>
         <button
-          onClick={handleFavorite}
+          onClick={() => dispatch(addFavorite(movie))}
           className="myButton bg-blue-600 hover:bg-blue-500 "
         >
           Favorilere ekle
